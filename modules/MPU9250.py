@@ -47,3 +47,8 @@ class MPU:
 		outM = [xM, yM, zM]
 
 		return outM
+
+# MPU = MPU()
+# MPU.accel()
+# MPU.gyros()
+# MPU.magnet()

@@ -2,9 +2,10 @@ import RPi.GPIO as GPIO
 from time import *
 
 class Buzzer:
+	GPIO.setmode(GPIO.BOARD)
+	
 	def __init__(self, pin):
 		self.pin = pin
-		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(self.pin, GPIO.OUT)
 		self.p = GPIO.PWM(self.pin, 300)
 

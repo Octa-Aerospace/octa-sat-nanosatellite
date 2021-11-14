@@ -1,6 +1,6 @@
-from modules import SDL_Pi_HDC1080
 import sys
 import os
+from modules import SDL_Pi_HDC1080
 
 class HDC:
 	def __init__(self):
@@ -15,7 +15,7 @@ class HDC:
 		humidity = round(self.hdc1080.readHumidity(), decimal)
 		return humidity
 
-HDC = HDC()
-print(HDC.hum(2))
-print(HDC.temp(2))
+# HDC = HDC()
+# print(HDC.hum(2))
+# print(HDC.temp(2))
 
