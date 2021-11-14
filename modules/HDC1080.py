@@ -14,3 +14,8 @@ class HDC:
 	def hum(self, decimal):
 		humidity = round(self.hdc1080.readHumidity(), decimal)
 		return humidity
+
+HDC = HDC()
+print(HDC.hum(2))
+print(HDC.temp(2))
+

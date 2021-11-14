@@ -1,19 +1,19 @@
 import RPi.GPIO as GPIO
 from time import *
 
-class Buzzer(self):
+class Buzzer:
 	def __init__(self):
 		self.pin = 12
 		GPIO.setmode(GPIO.BOARD)
-		GPIO.setup(pin, GPIO.OUT)
-		p = GPIO.PWM(pin, 300)
+		GPIO.setup(self.pin, GPIO.OUT)
+		self.p = GPIO.PWM(self.pin, 300)
 
-	def beep(self):
+	def beep(self, pin):
 		GPIO.setwarnings(False)
 		GPIO.output(pin, True)
-		p.start(0)
-		p.ChangeDutyCycle(100)
-		p.ChangeFrequency(100)
+		self.p.start(0)
+		self.p.ChangeDutyCycle(100)
+		self.p.ChangeFrequency(100)
 		sleep(0.5)
 		p.stop()
 
@@ -21,3 +21,7 @@ class Buzzer(self):
 		sleep(2)
 
 		GPIO.cleanup()
+
+Buzzer = Buzzer()
+Buzzer.beep(12)
+
