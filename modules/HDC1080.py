@@ -1,5 +1,4 @@
 import sys
-import os
 from modules import SDL_Pi_HDC1080
 
 class HDC:

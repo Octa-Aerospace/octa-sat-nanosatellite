@@ -46,33 +46,26 @@ class BMP:
         altitude = round(self.bmp280.get_altitude(qnh=baseline), decimal)
         return altitude
 
+    def read(self, decimal):
+        return self.temp(decimal), self.press(decimal), self.alt(decimal)
+
 class Buzzer:
-	GPIO.setmode(GPIO.BOARD)
-	
-	def __init__(self, pin):
-		self.pin = pin
-		GPIO.setup(self.pin, GPIO.OUT)
-		self.p = GPIO.PWM(self.pin, 300)
+    def __init__(self, pin):
+        self.pin = pin
+        GPIO.setup(self.pin, GPIO.OUT)
 
-	def beep(self):
-		GPIO.setwarnings(False)
-		GPIO.output(self.pin, True)
-		self.p.start(0)
-		self.p.ChangeDutyCycle(100)
-		self.p.ChangeFrequency(100)
-		sleep(0.5)
-		self.p.stop()
+    def beep_on(self):
+        GPIO.output(self.pin, True)
 
-		GPIO.output(self.pin, False)
-		sleep(2)
-
-		GPIO.cleanup()
+    def beep_off(self):
+        GPIO.output(self.pin, False)
 
 
-mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
 
 
 class NEO:
+    mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
+
     def decode(self,coord):
         l = list(coord)
         for i in range(0,len(l)-1):
@@ -101,7 +94,7 @@ class NEO:
             lon = self.decode(s[4])
             return lat,lon
 
-    def GPS(self):
+    def read(self):
         ser = serial.Serial(mport,9600,timeout = 2)
 
         dat = ser.readline().decode()
@@ -111,14 +104,19 @@ class NEO:
 
 
 class HDC:
-	def __init__(self):
-		sys.path.append('./modules/SDL_Pi_HDC1080_Python3')
-		self.hdc1080 = SDL_Pi_HDC1080.SDL_Pi_HDC1080()
+    def __init__(self):
+        sys.path.append('./modules/SDL_Pi_HDC1080_Python3')
+        self.hdc1080 = SDL_Pi_HDC1080.SDL_Pi_HDC1080()
 
-	def temp(self, decimal):
-		temperature = round(self.hdc1080.readTemperature(), decimal)
-		return temperature
+    def temp(self):
+        temperature = self.hdc1080.readTemperature()
+        return temperature
 
-	def hum(self, decimal):
-		humidity = round(self.hdc1080.readHumidity(), decimal)
-		return humidity
+    def hum(self):
+        humidity = self.hdc1080.readHumidity()
+        return humidity
+        
+    def read(self, decimal):
+        temp = self.temp(decimal)
+        hum = self.hum(decimal)
+        return temp, hum
