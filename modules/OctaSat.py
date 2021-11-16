@@ -1,6 +1,6 @@
 from time import sleep
 from datetime import datetime as dt
-from modules.mainModule import NEO, HDC, BMP, Buzzer
+from modules.mainModule import NEO, HDC, BMP, MPU, Buzzer
 from modules.transceiver import LORA
 from data.OctaCSV import OctaCSV as oc
 
@@ -9,6 +9,7 @@ class OctaSat:
         self.NEO = NEO()
         self.HDC = HDC()
         self.BMP = BMP()
+        self.MPU = MPU()
         self.Buzzer = Buzzer()
         self.LORA = LORA()
         self.oc = oc()
@@ -21,6 +22,9 @@ class OctaSat:
     
     def BMP_read(self):
         return self.BMP.read(decimal=2) #* temp, press, alt
+
+    def MPU_read(self):
+        return self.MPU.read() #* accel, gyros, magnet
 
     def Buzzer_beep(self):
         self.Buzzer.beep_on()
