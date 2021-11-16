@@ -1,7 +1,7 @@
 from time import sleep
 from datetime import datetime as dt
-from .modules.mainModule import NEO, HDC, BMP, Buzzer
-from .modules.transceiver import LORA
+from modules.mainModule import NEO, HDC, BMP, Buzzer
+from modules.transceiver import LORA
 
 class OctaSat:
     def __init__(self):
@@ -54,16 +54,3 @@ class OctaSat:
         self.LORA_send(payload) #* send payload
 
         sleep(1)
-
-OctaSat = OctaSat()
-OctaSat.start()
-
-if __name__ == '__main__':
-    while True:
-        try:
-            OctaSat.start()
-        except OSError:
-            print('\n[ ! ] Warning: OSError, running anyways :).\n')
-        except KeyboardInterrupt:
-            print("\n[ ! ] Exiting\n")
-            exit()
