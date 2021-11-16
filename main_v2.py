@@ -1,5 +1,6 @@
 from .modules import OctaSat
 
+
 OctaSat = OctaSat()
 
 if __name__ == '__main__':

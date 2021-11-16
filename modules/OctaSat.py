@@ -2,6 +2,7 @@ from time import sleep
 from datetime import datetime as dt
 from modules.mainModule import NEO, HDC, BMP, Buzzer
 from modules.transceiver import LORA
+from data.OctaCSV import OctaCSV as oc
 
 class OctaSat:
     def __init__(self):
@@ -10,6 +11,7 @@ class OctaSat:
         self.BMP = BMP()
         self.Buzzer = Buzzer()
         self.LORA = LORA()
+        self.oc = oc()
 
     def NEO_read(self):
         return self.NEO.read() #* lat, lon
@@ -25,13 +27,20 @@ class OctaSat:
         sleep(0.5) #! if we put this sleep, that will affect the module's reads
         self.Buzzer.beep_off() 
         sleep(2) #! same the above
+        return '[ ok ] Successfully beeped'
 
     def LORA_send(self, data):
         self.LORA.send(data)
+        return '[ ok ] Successfully sent'
 
     def Time(self):
         now = dt.datetime.now()
         return now.strftime('%d/%m, %H:%M:%S')
+
+    def black_box(self, file_name, data):
+        self.oc.header(file_name=file_name, headers=list(data.keys()))
+        self.oc.writer(file_name=file_name, data=list(data.values()))
+        return '[ ok ] Successfully saved'
 
     def start(self):
         latitude, longitude = self.NEO_read()
@@ -50,7 +59,7 @@ class OctaSat:
             'time': self.Time()
         }
 
+        self.black_box(file_name='../data/OctaCSV.csv', data=data)
+
         payload = self.LORA.prepare_payload(data) #* formating payload ready to send
         self.LORA_send(payload) #* send payload
-
-        sleep(1)
