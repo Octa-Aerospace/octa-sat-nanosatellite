@@ -41,6 +41,16 @@ class LORA:
         else:
             return "[ ok ] No packages received"
 
+    def prepare_payload(self, data):
+        payload = ""
+        for i in data:
+            payload += str(data[i])
+            if data[i] != data[list(data.keys())[-1]]:
+                payload += ";"
+                
+        return payload
+
+
 # LORA = LORA()
 # LORA.send("Hello World!")
 # LORA.receive()
