@@ -67,3 +67,4 @@ class OctaSat:
 
         payload = self.LORA.prepare_payload(data) #* formating payload ready to send
         print(self.LORA_send(payload)) #* send payload
+        print(payload)
