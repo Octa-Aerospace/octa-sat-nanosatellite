@@ -89,12 +89,14 @@ class NEO:
         if data[0:6] == "$GPGGA":
             s = data.split(",")
             if s[7] == '0' or s[7]=='00':
-                print ("no satellite data available")
-                return
+                print ("No satellite data available")
+                return "No satellite data available"
             time = s[1][0:2] + ":" + s[1][2:4] + ":" + s[1][4:6]
             lat = self.decode(s[2])
             lon = self.decode(s[4])
-            return lat,lon
+            return lat, lon
+        else:
+            raise Exception("Invalid data")
 
     def read(self):
         mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
