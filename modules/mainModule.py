@@ -103,6 +103,7 @@ class NEO:
         ser = serial.Serial(mport,9600,timeout = 2)
 
         dat = ser.readline().decode()
+        print(dat)
         mylat,mylon = self.paser(dat)
 
         return mylat, mylon
