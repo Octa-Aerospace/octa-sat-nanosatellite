@@ -102,7 +102,7 @@ class NEO:
         mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
         ser = serial.Serial(mport,9600,timeout = 2)
 
-        dat = ser.readline().decode()
+        dat = ser.readline().decode("utf-8")
         print(dat)
         mylat,mylon = self.paser(dat)
 
