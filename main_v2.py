@@ -1,4 +1,4 @@
-from modules import OctaSat
+from modules.OctaSat import OctaSat
 
 OctaSat = OctaSat()
 
