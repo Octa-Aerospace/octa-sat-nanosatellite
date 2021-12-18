@@ -66,4 +66,4 @@ class OctaSat:
         self.black_box(file_name='../data/OctaCSV.csv', data=data)
 
         payload = self.LORA.prepare_payload(data) #* formating payload ready to send
-        self.LORA_send(payload) #* send payload
+        print(self.LORA_send(payload)) #* send payload
