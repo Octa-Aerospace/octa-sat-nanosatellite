@@ -64,9 +64,6 @@ class Buzzer:
     def beep_off(self):
         GPIO.output(self.pin, False)
 
-
-
-
 class NEO:
     def decode(self,coord):
         l = list(coord)
