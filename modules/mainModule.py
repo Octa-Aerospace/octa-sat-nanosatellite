@@ -68,8 +68,6 @@ class Buzzer:
 
 
 class NEO:
-    mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
-
     def decode(self,coord):
         l = list(coord)
         for i in range(0,len(l)-1):
@@ -99,6 +97,7 @@ class NEO:
             return lat,lon
 
     def read(self):
+        mport = '/dev/ttyAMA0' #choose your com port on which you connected your neo 6m GPS
         ser = serial.Serial(mport,9600,timeout = 2)
 
         dat = ser.readline().decode()
