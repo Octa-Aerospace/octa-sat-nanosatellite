@@ -47,7 +47,7 @@ class OctaSat:
         return '[ ok ] Successfully saved'
 
     def start(self):
-        latitude, longitude = self.NEO_read()
+        # latitude, longitude = self.NEO_read()
         hdc_temperature, humidity = self.HDC_read()
         bmp_temperature, pressure, altitude = self.BMP_read()
         self.Buzzer_beep() #* just beep
