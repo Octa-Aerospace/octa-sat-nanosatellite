@@ -38,7 +38,7 @@ class OctaSat:
         return '[ ok ] Successfully sent'
 
     def Time(self):
-        now = dt.datetime.now()
+        now = dt.now()
         return now.strftime('%d/%m, %H:%M:%S')
 
     def black_box(self, file_name, data):
