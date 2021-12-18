@@ -10,7 +10,7 @@ class OctaSat:
         self.HDC = HDC()
         self.BMP = BMP()
         self.MPU = MPU()
-        self.Buzzer = Buzzer()
+        self.Buzzer = Buzzer(pin=18)
         self.LORA = LORA()
         self.oc = oc()
 
