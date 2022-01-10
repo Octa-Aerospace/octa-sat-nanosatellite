@@ -3,7 +3,8 @@ import digitalio
 import board
 import busio
 
-class LORA:        
+
+class LORA:
     def send(self, Payload):
         if len(Payload) > 252:
             return "You can only send a message up to 252 bytes in length at a time!"
@@ -13,9 +14,10 @@ class LORA:
         CS = digitalio.DigitalInOut(board.CE1)
         RESET = digitalio.DigitalInOut(board.D25)
         spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-    
-        rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ, baudrate=BAUDRATE)
-        rfm9x.tx_power = 23 # min 5dB; max 23dB
+
+        rfm9x = adafruit_rfm9x.RFM9x(
+            spi, CS, RESET, RADIO_FREQ_MHZ, baudrate=BAUDRATE)
+        rfm9x.tx_power = 23  # min 5dB; max 23dB
         #rfm9x.enable_crc = True
         #rfm9x.ack_delay = .1
         #rfm9x.node = 1
@@ -31,8 +33,9 @@ class LORA:
         CS = digitalio.DigitalInOut(board.CE1)
         RESET = digitalio.DigitalInOut(board.D25)
         spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-    
-        rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, RADIO_FREQ_MHZ, baudrate=BAUDRATE)
+
+        rfm9x = adafruit_rfm9x.RFM9x(
+            spi, CS, RESET, RADIO_FREQ_MHZ, baudrate=BAUDRATE)
         rfm9x.tx_power = 23
 
         packet = rfm9x.receive()
@@ -47,11 +50,5 @@ class LORA:
             payload += str(data[i])
             if data[i] != data[list(data.keys())[-1]]:
                 payload += ";"
-                
+
         return payload
-
-
-# LORA = LORA()
-# LORA.send("Hello World!")
-# LORA.receive()
-
