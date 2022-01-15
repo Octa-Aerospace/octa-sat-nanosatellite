@@ -5,7 +5,7 @@ OctaSat = OctaSat()
 if __name__ == '__main__':
     while True:
         try:
-            print(OctaSat.start())
+            OctaSat.start()
 
         except OSError:
             print('\n[ ! ] Warning: OSError, running anyways :).\n')

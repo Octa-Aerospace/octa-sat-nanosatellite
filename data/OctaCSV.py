@@ -9,7 +9,7 @@ class OctaCSV:
             if header_exist:
                 write = csv.writer(file)
                 write.writerow(headers)
-    
+
     def writer(self, file_name, data):
         with open(file_name, 'a+', newline='') as file:
             writer = csv.writer(file)
