@@ -48,14 +48,14 @@ class OctaSat:
         return '[ ok ] Successfully saved'
 
     def start(self):
-        latitude, longitude = self.NEO_read() #! maintenance
+        # latitude, longitude = self.NEO_read() #! maintenance
         hdc_temperature, humidity = self.HDC_read()
         bmp_temperature, pressure, altitude = self.BMP_read()
         self.Buzzer_beep()  # * just beep
 
         data = {
-            'latitude': latitude, #! maintenance
-            'longitude': longitude, #! maintenance
+            # 'latitude': latitude, #! maintenance
+            # 'longitude': longitude, #! maintenance
             'hdc_temperature': hdc_temperature,
             'bmp_temperature': bmp_temperature,
             'humidity': humidity,
@@ -69,4 +69,5 @@ class OctaSat:
         # * formating payload ready to send
         payload = self.LORA.prepare_payload(data)
         # * send payload and return the confimation
+        print(payload)
         print(self.LORA_send(payload))
